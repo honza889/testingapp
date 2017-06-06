@@ -1,0 +1,43 @@
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <servlet>
+        <servlet-name>KerberosServlet</servlet-name>
+        <servlet-class>jk.KerberosServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>KerberosServlet</servlet-name>
+        <url-pattern>/KerberosServlet</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <security-constraint>
+        <display-name>Security Constraint on KerberosServlet</display-name>
+        <web-resource-collection>
+            <web-resource-name>kerberosServlet</web-resource-name>
+            <url-pattern>/KerberosServlet</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>RequiredRole</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>SPNEGO</auth-method>
+        <realm-name>SPNEGO</realm-name>
+    </login-config>
+
+    <security-role>
+        <description>Role required for KerberosServlet</description>
+        <role-name>RequiredRole</role-name>
+    </security-role>
+
+</web-app>
